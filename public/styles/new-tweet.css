@@ -1,0 +1,28 @@
+section.new-tweet {
+  /*max-width: 100%;*/
+  margin: 0 2em;
+  padding: 1em;
+  background-color: #efefef;
+  border-color: #d5d5d5;
+  border-radius: 5px;
+}
+
+section.new-tweet h2 {
+  border-bottom: 1px solid black;
+}
+
+section.new-tweet form textarea {
+  display: block;
+  width: 100%;
+  height: 4em;
+  padding: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+section.new-tweet form input {
+  /*float: left;*/
+}
+
+section.new-tweet form span {
+  float: right;
+}

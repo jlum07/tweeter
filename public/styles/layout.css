@@ -23,3 +23,93 @@ body {
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+body .container {
+  width: 450px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding-top: 140px;
+}
+
+
+/*
+ * Tweet display
+ */
+
+article.tweet {
+  opacity: 0.75;
+  margin: 0.5em 2em;
+  border-radius: 5px;
+  /*padding: 1em;*/
+  border: 1px solid #898989;
+}
+
+article.tweet:hover {
+  opacity: 1;
+}
+
+article.tweet:hover .tweet-icons {
+  opacity: 1;
+}
+
+article.tweet header {
+  display: flex;
+  justify-content: space-between;
+  /*width: calc(100% + 2em);*/
+  background-color: #efefef;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  /*possible to make parent padding? background color */
+  border-radius: 5px 5px 0 0;
+  /*margin: -1em -1em 0 -1em;*/
+}
+
+article.tweet header img {
+  border-radius: 5px;
+  height: 65px;
+  width: 65px;
+  /*margin: 0.5em;*/
+}
+
+article.tweet header .full-name {
+  vertical-align: top;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #234751;
+  line-height: 1.5em;
+  margin-left: 0.25em;
+}
+
+article.tweet header .username {
+  color: #808080;
+  font-size: 0.85em;
+  line-height: 2em;
+}
+
+article.tweet .tweet-body {
+  padding: 0.5em;
+  min-height: 75px;
+  /*height: auto;*/
+  /*display: table-cell;*/
+  /*vertical-align: middle;*/
+  /* https://css-tricks.com/centering-css-complete-guide/ */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 75px;
+}
+
+article.tweet footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em;
+  border-top: 1px solid #efefef;
+}
+
+article.tweet footer .tweet-icons {
+  opacity: 0;
+  color: #61c6b8;
+}
