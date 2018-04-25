@@ -32,7 +32,7 @@ body .container {
   width: 450px;
   margin: 0 auto;
   background-color: #fff;
-  padding-top: 140px;
+  padding-top: 95px;
 }
 
 
@@ -100,6 +100,7 @@ article.tweet .tweet-body {
   justify-content: center;
   flex-direction: column;
   min-height: 75px;
+  word-break: break-word;
 }
 
 article.tweet footer {
@@ -112,4 +113,23 @@ article.tweet footer {
 article.tweet footer .tweet-icons {
   opacity: 0;
   color: #61c6b8;
+}
+
+main.container #error {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ff3a3ac2;
+  /*border: 2px solid #ff0000;*/
+  border-radius: 5px;
+  margin: 0 2em;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+main.container #error-hide {
+  display: none;
+}
+
+main.container #error #error-message {
+  margin-left: 0.25em;
 }

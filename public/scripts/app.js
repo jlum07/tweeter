@@ -52,24 +52,89 @@ const data = [
 ];
 
 
-function renderTweets(tweets) {
 
-    for (let i = 0; i < tweets.length; i++) {
-      $('#tweet-list').append(createTweetElement(tweets[i]));
-    }
+// consider breaking out into another js file for reusablity and oraganization
+function getTimeSince(timeSince) {
+
+  // if (timeSince < 60) {
+  //   return `${timeSince} seconds ago`;
+  // } else if  (timeSince < 60*60) {
+  //   return `${timeSince/60} minutes ago`;
+  // } else if  (timeSince < 60*60*24) {
+  //   return `${timeSince/60/60} hours ago`;
+  // } else if  (timeSince < 60*60*24*30) {
+  //   return `${timeSince/60/60/24} days ago`;
+  // } else if  (timeSince < 60*60*24*30*12) {
+  //   return `${timeSince/60/60/24/30} months ago`;
+  // } else {
+  //   return `${timeSince/60/60/24/30/12} years ago`;
+  // }
+
+  if (timeSince < 60) {
+    return `${Math.round(timeSince)} seconds ago`;
+  } else if  (timeSince < 60*60) {
+    return `${Math.round(timeSince/60)} minutes ago`;
+  } else if  (timeSince < 60*60*24) {
+    return `${Math.round(timeSince/60/60)} hours ago`;
+  } else if  (timeSince < 60*60*24*30) {
+    return `${Math.round(timeSince/60/60/24)} days ago`;
+  } else if  (timeSince < 60*60*24*30*12) {
+    return `${Math.round(timeSince/60/60/24/30)} months ago`;
+  } else {
+    return `${Math.round(timeSince/60/60/24/30/12)} years ago`;
+  }
+
+  // for round to 2 decimal .toFixed(2)
 
 }
 
 
-// createTweetElement
 // consider making the function in JQ
 function createTweetElement(tweet) {
 
-  let dateSinceSeconds = ((Date.now() - tweet.created_at)/1000);
-  let dateSince = getTimeSince(dateSinceSeconds);
+  const dateSinceSeconds = ((Date.now() - tweet.created_at)/1000);
+  const dateSince = getTimeSince(dateSinceSeconds);
 
-  let HTML = `
-        <article class="tweet">
+  console.log(dateSince);
+
+// ${tweet.content.text}
+
+  // <script>alert('This shouldnt happen!!');</script>
+
+  // const $xssFix = $('#tweet-body', tweetHTML).text(tweet.content.text);
+  // console.log($xssFix);
+  // console.log(tweet.content.text);
+
+  // const tweetHTML =  $(
+  //     `<article class="tweet">
+  //         <header>
+  //           <div>
+  //             <img src="${tweet.user.avatars.regular}" alt="User Avatar">
+  //             <span class="full-name">${tweet.user.name}</span>
+  //           </div>
+
+  //           <div class="username">${tweet.user.handle}</div>
+  //         </header>
+  //         <div class="tweet-body">
+  //           ${$('<p></p>').}
+  //         </div>
+  //         <footer>
+  //           <div class="tweet-age">
+  //             ${dateSince}
+  //           </div>
+  //           <div class="tweet-icons">
+  //             <i class="fas fa-flag"></i>
+  //             <i class="fas fa-retweet"></i>
+  //             <i class="fas fa-heart"></i>
+  //           </div>
+  //         </footer>
+  //       </article>`);
+
+  // return $('.tweet-body', tweetHTML).text(tweet.content.text);
+
+
+   return $(
+      `<article class="tweet">
           <header>
             <div>
               <img src="${tweet.user.avatars.regular}" alt="User Avatar">
@@ -79,7 +144,7 @@ function createTweetElement(tweet) {
             <div class="username">${tweet.user.handle}</div>
           </header>
           <div class="tweet-body">
-            ${tweet.content.text}
+            ${$('<div>').text(tweet.content.text).html()}
           </div>
           <footer>
             <div class="tweet-age">
@@ -91,61 +156,142 @@ function createTweetElement(tweet) {
               <i class="fas fa-heart"></i>
             </div>
           </footer>
-        </article>
-      `;
+        </article>`);
 
-  return $(HTML);
 
 }
 
-function getTimeSince(timeSince) {
 
-  if (timeSince < 60) {
-    return `${timeSince} seconds ago`;
-  } else if  (timeSince < 60*60) {
-    return `${timeSince/60} minutes ago`;
-  } else if  (timeSince < 60*60*24) {
-    return `${timeSince/60/60} hours ago`;
-  } else if  (timeSince < 60*60*24*30) {
-    return `${timeSince/60/60/24} days ago`;
-  } else if  (timeSince < 60*60*24*30*12) {
-    return `${timeSince/60/60/24/30} months ago`;
-  } else {
-    return `${timeSince/60/60/24/30/12} years ago`;
-  }
+function renderTweets(tweets) {
+    // look into for each
+    $('#tweet-list').empty();
+    for (let i = 0; i < tweets.length; i++) {
+      $('#tweet-list').prepend(createTweetElement(tweets[i]));
+    }
 
 }
 
 
 $(document).ready(function() {
 
-renderTweets(data);
+  // renderTweets(data);
+  loadTweets();
+
+});
+
+
+function loadTweets () {
+
+  $(document).ready(function() {
+
+    // $.ajax({
+    //   dataType: "json",
+    //   type: "GET",
+    //   url: "/tweets/",
+    //   data: "/tweets.json",
+    //   success: function(data, status, jqXHR) {
+    //     // console.log(data);
+    //     // return data;
+    //     renderTweets(data);
+    //   },
+    //   error: function(jqXHR, status, error) {
+    //     console.log('Error:', jqXHR , status, error);
+    //   }
+    // });
+
+    $.ajax("/tweets/", {
+    })
+    .done(function (data) {
+      renderTweets(data);
+    })
+    .fail(function(xhr) {
+      console.log('error', xhr);
+    });
+
+
+    // $.getJSON( "/tweets/", function(data) {renderTweets(data)});
+
+
+  });
+
+}
+
+
+// Submit button event
+$(document).ready(function() {
+
+  $('#tweet-form').submit(function(event) {
+
+    event.preventDefault();
+
+    // add failure
+    // $.ajax({
+    //   type: "POST",
+    //   url: "/tweets/",
+    //   data: $("#tweet-text").serialize(),
+    //   success: function() {
+    //     location.reload();
+    //   }
+    // });
+
+    const tweetText = $(this).parent().find('#tweet-text');
+    const errorMsg = $(this).parent().parent().parent().find('#error-hide');
+
+    if (tweetText.val().length > 140) {
+      // alert("Posts must be less than 140 characters.");
+      $(this).parent().parent().parent().find('#error-hide').slideDown();
+      errorMsg.find('#error-message').text('Posts must be less than 140 characters.');
+    } else if (tweetText.val() === "") {
+      // alert("You must enter a message.");
+      $(this).parent().parent().parent().find('#error-hide').slideDown();
+      errorMsg.find('#error-message').text('You cannot post a blank message.');
+    } else {
+
+      $.ajax({
+        type: "POST",
+        url: "/tweets/",
+        data: $("#tweet-text").serialize(),
+      })
+      .done(function() {
+        loadTweets();
+        // location.reload();
+      })
+      .fail(function(xhr) {
+        console.log('error', xhr);
+      });
+
+      tweetText.val("");
+      $(this).find('.counter').text('140');
+      $('#error-hide').slideUp();
+      // console.log(tweetText.val());
+
+    }
+
+  });
+
+  $('#error-hide #error-close').click(function(event) {
+      $(this).parent().parent().slideUp();
+  });
 
 });
 
 
 
 
+// Compose button
+$(document).ready(function() {
 
+   $("#nav-bar #compose-button").on("click", function() {
 
-// Ajax Example
-// $(function() {
-//   var $button = $('#load-more-posts');
-//   $button.on('click', function () {
-//     console.log('Button clicked, performing ajax call...');
-//     $.ajax({
-//       url: 'more-posts.html',
-//       method: 'GET',
-//       success: function (morePostsHtml) {
-//         console.log('Success: ', morePostsHtml);
-//         $button.replaceWith(morePostsHtml);
-//       }
-//     });
-//   });
-// });
+    // console.log($(this).parent().parent().find('.container').find('.new-tweet'));
+    // $(this).parent().parent().parent().find('.container').find('#new-tweet').slideToggle();
+    $('#new-tweet').slideToggle();
+    $('#new-tweet').find('#tweet-text').focus();
+    $('#error-hide').slideUp();
 
 
 
+   });
 
 
-
+});
