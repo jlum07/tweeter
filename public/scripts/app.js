@@ -13,14 +13,7 @@ function createTweetElement(tweet) {
 
   // trying to have unique ids for icons so that when hover they light up individually
   const userHandle =  tweet.user.handle.slice(1);
-  // console.log(userHandle);
 
-
-  // <script>alert('This shouldnt happen!!');</script>
-
-  // const $xssFix = $('#tweet-body', tweetHTML).text(tweet.content.text);
-  // console.log($xssFix);
-  // console.log(tweet.content.text);
 
   // Another way to do XSS fix. Difference is mostly in the return line
   // const tweetHTML =  $(
@@ -67,9 +60,9 @@ function createTweetElement(tweet) {
               ${dateSince}
             </div>
             <div class="tweet-icons">
-              <i class="fas fa-flag" id="icon-report-${userHandle}"></i>
-              <i class="fas fa-retweet" id="icon-retweet-${userHandle}"></i>
-              <i class="fas fa-heart" id="icon-like-${userHandle}"></i>
+              <i class="report-icon fas fa-flag" id="icon-report-${userHandle}"></i>
+              <i class="retweet-icon fas fa-retweet" id="icon-retweet-${userHandle}"></i>
+              <i class="like-icon fas fa-heart" id="icon-like-${userHandle}"></i>
             </div>
           </footer>
         </article>`);
@@ -141,18 +134,13 @@ $(document).ready(function() {
 
     event.preventDefault();
 
-    // const $tweetText = $(this).parent().find('#tweet-text');
-    // const $errorMsg = $(this).parent().parent().parent().find('#error-hide');
-
     const $tweetText = $('#tweet-text');
     const $errorMsg = $('#error-hide');
 
     if ($tweetText.val().length > 140) {
-      // $(this).parent().parent().parent().find('#error-hide').slideDown();
       $errorMsg.slideDown();
       $errorMsg.find('#error-message').text('Posts must be less than 140 characters.');
     } else if ($tweetText.val() === "") {
-      // $(this).parent().parent().parent().find('#error-hide').slideDown();
       $errorMsg.slideDown();
       $errorMsg.find('#error-message').text('You cannot post a blank message.');
     } else {
@@ -164,7 +152,6 @@ $(document).ready(function() {
       })
       .done(function() {
         loadTweets();
-        // location.reload();
       })
       .fail(function(xhr) {
         console.log('error', xhr);
@@ -179,7 +166,6 @@ $(document).ready(function() {
   });
 
   $('#error-hide #error-close').click(function(event) {
-      // $(this).parent().parent().slideUp();
       $('#error-hide').slideUp();
   });
 
@@ -193,8 +179,6 @@ $(document).ready(function() {
 
     const $newTweet = $('#new-tweet');
 
-    // console.log($(this).parent().parent().find('.container').find('.new-tweet'));
-    // $(this).parent().parent().parent().find('.container').find('#new-tweet').slideToggle();
     $newTweet.slideToggle();
     $newTweet.find('#tweet-text').focus();
     $('#error-hide').slideUp();
