@@ -45,7 +45,6 @@ article.tweet {
   opacity: 0.75;
   margin: 0.5em 2em;
   border-radius: 5px;
-  /*padding: 1em;*/
   border: 1px solid #898989;
 }
 
@@ -60,19 +59,15 @@ article.tweet:hover .tweet-icons {
 article.tweet header {
   display: flex;
   justify-content: space-between;
-  /*width: calc(100% + 2em);*/
   background-color: #efefef;
   padding: 0.5em 0.5em 0.5em 0.5em;
-  /*possible to make parent padding? background color */
   border-radius: 5px 5px 0 0;
-  /*margin: -1em -1em 0 -1em;*/
 }
 
 article.tweet header img {
   border-radius: 5px;
   height: 65px;
   width: 65px;
-  /*margin: 0.5em;*/
 }
 
 article.tweet header .full-name {
@@ -93,10 +88,6 @@ article.tweet header .username {
 article.tweet .tweet-body {
   padding: 0.5em;
   min-height: 75px;
-  /*height: auto;*/
-  /*display: table-cell;*/
-  /*vertical-align: middle;*/
-  /* https://css-tricks.com/centering-css-complete-guide/ */
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -115,6 +106,6 @@ article.tweet footer .tweet-icons {
   color: #61c6b8;
 }
 
-article.tweet footer .tweet-icon i[id^='icon-'] {
+article.tweet footer .tweet-icon i[id^='icon-']:hover {
   color: red;
 }
