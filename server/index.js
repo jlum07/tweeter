@@ -13,11 +13,14 @@ app.use(express.static("public"));
 // The in-memory database of tweets. It's a basic object with an array in it.
 // const db = require("./lib/in-memory-db");
 
+// Global Mongo variable -- get rid of
+let db;
+
 // Connecting to MongoDB
 const {MongoClient} = require("mongodb");
 const MONGODB_URI = "mongodb://localhost:27017/tweeter";
 
-MongoClient.connect(MONGODB_URI, (err, db) => {
+MongoClient.connect(MONGODB_URI, (err, mDB) => {
 
   if (err) {
     console.error(`Failed to connect: ${MONGODB_URI}`);
@@ -26,16 +29,25 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
 
   console.log(`Connected to mongodb: ${MONGODB_URI}`);
 
+  db = mDB; // Should I be doing this??? Why??
+
   const DataHelpers = require("./lib/data-helpers.js")(db);
-
   const tweetsRoutes = require("./routes/tweets")(DataHelpers);
+  app.use("/tweets", tweetsRoutes); //should this be here?
 
-  app.use("/tweets", tweetsRoutes);
 
+  // console.log(db.tweets.find());
 
-  // db.close();
+  // db.close(); // Where to close??? Crashes here and in datahelper after one query
 
 });
+
+
+// cant use below even though defining db as global??
+// const DataHelpers = require("./lib/data-helpers.js")(db);
+// const tweetsRoutes = require("./routes/tweets")(DataHelpers);
+// app.use("/tweets", tweetsRoutes); //should this be here?
+
 
 // The `data-helpers` module provides an interface to the database of tweets.
 // This simple interface layer has a big benefit: we could switch out the
