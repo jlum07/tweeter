@@ -46,8 +46,6 @@ module.exports = function(DataHelpers) {
 
     let tweetID = req.params.id;
 
-    // console.log(tweetID);
-
     DataHelpers.getOneTweet(tweetID , (err, tweet) => {
       if (err) {
         res.status(500).json({ error: err.message });

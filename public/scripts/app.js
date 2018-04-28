@@ -6,7 +6,6 @@
 
 function createTweetElement(tweet) {
 
-  // const dateSinceSeconds = ((Date.now() - tweet.created_at)/1000);
   const dateSince = getTimeSince(tweet.created_at);
 
   // trying to have unique ids for icons so that when hover they light up individually
