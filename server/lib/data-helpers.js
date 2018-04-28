@@ -2,6 +2,7 @@
 
 // Simulates the kind of delay we see with network or filesystem operations
 const simulateDelay = require("./util/simulate-delay");
+const {ObjectId} = require('mongodb');
 
 // Defines helper functions for saving and getting tweets, using the database `db`
 module.exports = function makeDataHelpers(db) {
@@ -19,6 +20,13 @@ module.exports = function makeDataHelpers(db) {
     getTweets: function(callback) {
 
       db.collection("tweets").find().sort({created_at: 1}).toArray(callback);
+
+    },
+
+    // Return only one tweet to display
+    getOneTweet: function(id ,callback) {
+
+      db.collection("tweets").findOne(ObjectId(id), callback);
 
     }
 

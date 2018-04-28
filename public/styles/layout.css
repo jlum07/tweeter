@@ -106,6 +106,14 @@ article.tweet footer .tweet-icons {
   color: #61c6b8;
 }
 
-article.tweet footer .tweet-icon i[id^='icon-']:hover {
+.tweet-icons .report-icon:hover {
+  color: black;
+}
+
+.tweet-icons .retweet-icon:hover {
+  color: #1da1f2;
+}
+
+.tweet-icons .like-icon:hover {
   color: red;
 }

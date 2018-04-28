@@ -1,0 +1,69 @@
+#tweet-moto {
+  display: none;
+  z-index: 2000;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+
+}
+
+#tweet-moto #one-tweet {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2001;
+  width: 600px;
+  height: 600px;
+  border-radius: 5px;
+}
+
+#one-tweet-head {
+  display: inline-flex;
+  width: 100%;
+  min-height: 80px;
+  background-color: rgba(0, 0, 0, 0.6);
+  align-self: flex-start;
+  padding: 0.5em 0.5em;
+  border-radius: 5px 5px 0 0;
+}
+
+#one-tweet-avatar {
+  height: 70px;
+  width: 70px;
+  border-radius: 5px;
+  margin-right: 0.5em;
+}
+
+#one-tweet-name {
+  color: white;
+  font-weight: bolder;
+  font-size: 1.5em;
+}
+
+#one-tweet-timesince {
+  color: white;
+  font-weight: bold;
+}
+
+#one-tweet-foot {
+  width: 100%;
+  min-height: 80px;
+  background-color: rgba(0, 0, 0, 0.6);
+  align-self: flex-end;
+  padding: 1em 2em;
+  border-radius: 0 0 5px 5px;
+}
+
+#one-tweet-username {
+  color: white;
+  font-weight: bold;
+}
+
+#one-tweet-message {
+  color: white;
+}

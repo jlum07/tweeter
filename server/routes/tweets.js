@@ -41,6 +41,21 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  // Attempting to get one tweet
+  tweetsRoutes.get("/id/:id", function(req, res) {
+
+    let tweetID = req.params.id;
+
+    DataHelpers.getOneTweet(tweetID , (err, tweet) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.json(tweet);
+      }
+    });
+
+  });
+
   return tweetsRoutes;
 
 }
