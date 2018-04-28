@@ -1,4 +1,6 @@
-function getTimeSince(timeSince) {
+function getTimeSince(created_at) {
+
+  const timeSince = ((Date.now() - created_at)/1000);
 
   if (timeSince < 60) {
     return `${Math.round(timeSince)} seconds ago`;
