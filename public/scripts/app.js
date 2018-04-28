@@ -4,12 +4,10 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-
-// consider making the function in JQ
 function createTweetElement(tweet) {
 
-  const dateSinceSeconds = ((Date.now() - tweet.created_at)/1000);
-  const dateSince = getTimeSince(dateSinceSeconds);
+  // const dateSinceSeconds = ((Date.now() - tweet.created_at)/1000);
+  const dateSince = getTimeSince(tweet.created_at);
 
   // trying to have unique ids for icons so that when hover they light up individually
   const userHandle =  tweet.user.handle.slice(1);
@@ -43,7 +41,7 @@ function createTweetElement(tweet) {
 
 
    return $(
-      `<article class="tweet">
+      `<article class="tweet" data-id="${tweet._id}">
           <header>
             <div>
               <img src="${tweet.user.avatars.regular}" alt="User Avatar">
@@ -60,9 +58,9 @@ function createTweetElement(tweet) {
               ${dateSince}
             </div>
             <div class="tweet-icons">
-              <i class="report-icon fas fa-flag" id="icon-report-${userHandle}"></i>
-              <i class="retweet-icon fas fa-retweet" id="icon-retweet-${userHandle}"></i>
-              <i class="like-icon fas fa-heart" id="icon-like-${userHandle}"></i>
+              <i class="report-icon fas fa-flag"></i>
+              <i class="retweet-icon fas fa-retweet"></i>
+              <i class="like-icon fas fa-heart"></i>
             </div>
           </footer>
         </article>`);
@@ -83,39 +81,38 @@ function renderTweets(tweets) {
 
 function loadTweets () {
 
-  $(document).ready(function() {
-
-    // AJAX Callback
-    // $.ajax({
-    //   dataType: "json",
-    //   type: "GET",
-    //   url: "/tweets/",
-    //   data: "/tweets.json",
-    //   success: function(data, status, jqXHR) {
-    //     // console.log(data);
-    //     // return data;
-    //     renderTweets(data);
-    //   },
-    //   error: function(jqXHR, status, error) {
-    //     console.log('Error:', jqXHR , status, error);
-    //   }
-    // });
-
-    // AJAX Promise
-    $.ajax("/tweets/", {
-    })
-    .done(function (data) {
-      renderTweets(data);
-    })
-    .fail(function(xhr) {
-      console.log('error', xhr);
-    });
-
-    // Similar to callback but short forms for just JSON.. I think
-    // $.getJSON( "/tweets/", function(data) {renderTweets(data)});
 
 
+  // AJAX Callback
+  // $.ajax({
+  //   dataType: "json",
+  //   type: "GET",
+  //   url: "/tweets/",
+  //   data: "/tweets.json",
+  //   success: function(data, status, jqXHR) {
+  //     // console.log(data);
+  //     // return data;
+  //     renderTweets(data);
+  //   },
+  //   error: function(jqXHR, status, error) {
+  //     console.log('Error:', jqXHR , status, error);
+  //   }
+  // });
+
+  // AJAX Promise
+  $.ajax("/tweets/", {
+  })
+  .done(function (data) {
+    renderTweets(data);
+  })
+  .fail(function(xhr) {
+    console.log('error', xhr);
   });
+
+  // Similar to callback but short forms for just JSON.. I think
+  // $.getJSON( "/tweets/", function(data) {renderTweets(data)});
+
+
 
 }
 
@@ -123,6 +120,7 @@ function loadTweets () {
 $(document).ready(function() {
 
   loadTweets();
+
 
 });
 
