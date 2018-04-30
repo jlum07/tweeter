@@ -9,8 +9,8 @@ function createTweetElement(tweet) {
   const dateSince = getTimeSince(tweet.created_at);
 
   // trying to have unique ids for icons so that when hover they light up individually
-  const userHandle =  tweet.user.handle.slice(1);
-
+  // removed this from the below HTML code for now. trying to figure out best way to use this
+  // const userHandle =  tweet.user.handle.slice(1);
 
   // Another way to do XSS fix. Difference is mostly in the return line
   // const tweetHTML =  $(
@@ -80,8 +80,6 @@ function renderTweets(tweets) {
 
 function loadTweets () {
 
-
-
   // AJAX Callback
   // $.ajax({
   //   dataType: "json",
@@ -111,8 +109,6 @@ function loadTweets () {
   // Similar to callback but short forms for just JSON.. I think
   // $.getJSON( "/tweets/", function(data) {renderTweets(data)});
 
-
-
 }
 
 
@@ -120,8 +116,10 @@ $(document).ready(function() {
 
   loadTweets();
 
-
 });
+
+
+
 
 
 // Submit button event

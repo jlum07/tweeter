@@ -1,5 +1,7 @@
 function getTimeSince(created_at) {
 
+  // This function gets current time and and subtracts created time
+  // then caclulates the time since and outputs a correspondinng string
   const timeSince = ((Date.now() - created_at)/1000);
 
   if (timeSince < 60) {
