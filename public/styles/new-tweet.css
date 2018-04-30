@@ -36,3 +36,21 @@ section#new-tweet form .count-black {
 section#new-tweet form .count-red {
   color: red;
 }
+
+#compose-button-div {
+  /* Hides new button for now */
+  display: none;
+  margin: 0 2em;
+}
+
+#compose-button-2 {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0.5em 2em;
+  background-color: #efefef;
+  /*border: 1px solid #a6a6a6;*/
+  border: none;
+  border-radius: 5px;
+}
+
